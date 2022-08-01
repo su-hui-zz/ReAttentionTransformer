@@ -9,7 +9,7 @@ Based on Deit, we propose an re-attention strategy based on token refinement tra
 in transformer and focuses on the target object, achieving remarkable performance in WSOL.
 
 
-![TRT](./figures/framework.pdf)
+![TRT](./figures/framework.png)
 
 # Updates
 - 
