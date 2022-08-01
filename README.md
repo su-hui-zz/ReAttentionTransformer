@@ -25,7 +25,7 @@ All our trained TRT weights are provided here:
 ## CUB-200-2011 dataset
 
 | Backbone | Loc.Acc@1 | Loc.Acc@5 | Loc.Gt-Known | MaxBoxAccV2 | Baidu Drive | Code |
-| --- | --- | --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- | --- |
 |  Deit-TRT   |   76.5   |   88.0  |  91.1  |   82.08  |  [model](https://pan.baidu.com/s/1eHcU3UnGW8k7lyCcHMWwSg)  | 0311  |
 |  Deit-TRT-384   |   80.5   |  91.7   |  94.1  |  87.04  |   [model](https://pan.baidu.com/s/1TnKfXrD_f-IAMGfxGUDARA)  | 0311  |
 
@@ -33,7 +33,7 @@ All our trained TRT weights are provided here:
 ## ILSVRC2012 dataset
 
 | Backbone | Loc.Acc@1 | Loc.Acc@5 | Loc.Gt-Known | MaxBoxAccV2 | Baidu Drive | Code |
-| --- | --- | --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- | --- |
 |  Deit-TRT   |   58.8   |  68.3   |  70.7  |  67.35   |   [model](https://pan.baidu.com/s/19QfTJE0w2zjdYXc7718JHg)  | 0311  |
 
 
