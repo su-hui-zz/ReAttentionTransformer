@@ -11,10 +11,10 @@ in transformer and focuses on the target object, achieving remarkable performanc
 
 ![TRT](./figures/framework.png)
 
-# Updates
+## Updates
 - 
 
-# Model Zoo
+## Model Zoo
 
 We provide pretrained TRT models trained on CUB-200-2011 and ImageNet_ILSVRC2012 datasets.
 
@@ -22,7 +22,7 @@ All our trained TRT weights are provided here:
 链接：    https://pan.baidu.com/s/1VKa6lAam-JHPiuLoIHwfAw 
 提取码：  0311 
 
-## CUB-200-2011 dataset
+#### CUB-200-2011 dataset
 
 | Backbone | Loc.Acc@1 | Loc.Acc@5 | Loc.Gt-Known | MaxBoxAccV2 | Baidu Drive | Code |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -30,14 +30,14 @@ All our trained TRT weights are provided here:
 |  Deit-TRT-384   |   80.5   |  91.7   |  94.1  |  87.04  |   [model](https://pan.baidu.com/s/1TnKfXrD_f-IAMGfxGUDARA)  | 0311  |
 
 
-## ILSVRC2012 dataset
+#### ILSVRC2012 dataset
 
 | Backbone | Loc.Acc@1 | Loc.Acc@5 | Loc.Gt-Known | MaxBoxAccV2 | Baidu Drive | Code |
 | --- | --- | --- | --- | --- | --- | --- |
 |  Deit-TRT   |   58.8   |  68.3   |  70.7  |  67.35   |   [model](https://pan.baidu.com/s/19QfTJE0w2zjdYXc7718JHg)  | 0311  |
 
 
-# Usage
+## Usage
 
 First clone the repository locally:
 ```
@@ -46,9 +46,9 @@ git clone https://github.com/....git
 Then install Pytorch 1.10.2 , torchvision 0.11.3+.
 pip install timm==0.5.4
 
-## Data preparation
+### Data preparation
 
-### CUB-200-2011 dataset
+#### CUB-200-2011 dataset
 
 Please download and extrate [CUB-200-2011](http://www.vision.caltech.edu/visipedia/CUB-200-2011.html) dataset. 
 
@@ -69,7 +69,7 @@ The directory structure is the following:
       train_test_split.txt
 ```
 
-### ImageNet1k
+#### ImageNet1k
 
 Download [ILSVRC2012](http://image-net.org/) dataset and  extract train and val images.
 
@@ -101,7 +101,7 @@ The directory structure is organized as follows:
 
 And the training and validation data is expected to be in the `train/` folder and `val` folder respectively:
 
-## For training: training examples are in train_cub.sh and train_ilsvrc.sh.
+### For training: training examples are in train_cub.sh and train_ilsvrc.sh.
 The basic backbone used is the Deit-Base pretrained on ImageNet-1K. We train the backbone and TPSM branches with ./tools_cam/train_cam.py first, then we fix backbone and TPSM branch parameters and train the CAM branch with ./tools_cam/train_cam_fusecamfz.py. 
 
 On CUB-200-2011 dataset:
@@ -123,7 +123,7 @@ python ./tools_cam/train_cam_fusecamfz.py --config_file ./configs/ILSVRC/deit_tr
 ```
 Please note that pretrained model weights of Deit-tiny, Deit-small and Deit-base on ImageNet-1k model will be downloaded when you first train you model, so the Internet should be connected. 
 
-## For evaluation:  evaluating examples are in val_cub.sh and val_ilsvrc.sh
+### For evaluation:  evaluating examples are in val_cub.sh and val_ilsvrc.sh
 On CUB-200-2011 dataset:
 ```
 python ./tools_cam/test_cam.py --config_file configs/CUB/deit_trt_fuse_base_patch16_224_0.6.yaml --resume ./ckpt_save/CUB/deit_trt_fuse_base_patch16_224_TOKENTHR0.6_BS128_0.912/ckpt/model_best_top1_loc.pth MODEL.CAM_THR 0.1 TEST.METRICS gt_top  #(TEST.METRICS maxboxaccv2)
@@ -137,19 +137,19 @@ python ./tools_cam/test_cam.py --config_file configs/ILSVRC/deit_trt_fuse_base_p
 `TEST.SAVE_BOXED_IMAGE` should be chosen `True` if you want to save all test images with bounding boxes. 
 
 
-# Visualization
+### Visualization
 We provided `visualize.py` in `tools_cam` folder.
 ```
 python ./tools_cam/visualize.py --config_file config_file_pth --pth_file trained_weights_pth_file
 ```
 
-# Performance
+## Performance
 
 We provide some visualization results as follows to show our superiority.
 
 ![TRT](./figures/performance.png)
 
-# Contacts
+## Contacts
 
 If you have any question about our work or this repository, please don't hesitate to contact us by emails.
 - [suhui@zhejianglab.com]
@@ -157,13 +157,14 @@ If you have any question about our work or this repository, please don't hesitat
 
 You can also open an issue under this project.
 
-# Citation
+## Citation
 If you use this code for a paper please cite:
 
 ```
 
 ```
 
-# Acknowledgment
+## Acknowledgment
 
 Our project references the codes of  [vasgaowei/TS-CAM: Codes for TS-CAM: Token Semantic Coupled Attention Map for Weakly Supervised Object Localization. (github.com)](https://github.com/vasgaowei/TS-CAM) . Thanks for their works and sharing.
+
