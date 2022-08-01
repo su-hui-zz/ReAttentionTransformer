@@ -143,8 +143,14 @@ We provided `visualize.py` in `tools_cam` folder.
 python ./tools_cam/visualize.py --config_file config_file_pth --pth_file trained_weights_pth_file
 ```
 
+# Performance
+
+We provide some visualization results as follows to show our superiority.
+
+![TRT](./figures/performance.png)
 
 # Contacts
+
 If you have any question about our work or this repository, please don't hesitate to contact us by emails.
 - [suhui@zhejianglab.com]
 - [chenglc@zhejianglab.com]
@@ -157,3 +163,7 @@ If you use this code for a paper please cite:
 ```
 
 ```
+
+# Acknowledgment
+
+Our project references the codes of  [vasgaowei/TS-CAM: Codes for TS-CAM: Token Semantic Coupled Attention Map for Weakly Supervised Object Localization. (github.com)](https://github.com/vasgaowei/TS-CAM) . Thanks for their works and sharing.
