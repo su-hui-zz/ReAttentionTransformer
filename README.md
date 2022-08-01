@@ -19,8 +19,8 @@ in transformer and focuses on the target object, achieving remarkable performanc
 We provide pretrained TRT models trained on CUB-200-2011 and ImageNet_ILSVRC2012 datasets.
 
 All our trained TRT weights are provided here:  
-链接：    https://pan.baidu.com/s/1VKa6lAam-JHPiuLoIHwfAw 
-提取码：  0311 
+link:    https://pan.baidu.com/s/1VKa6lAam-JHPiuLoIHwfAw 
+code：  0311 
 
 #### CUB-200-2011 dataset
 
@@ -104,12 +104,14 @@ And the training and validation data is expected to be in the `train/` folder an
 ### For training: training examples are in train_cub.sh and train_ilsvrc.sh.
 The basic backbone used is the Deit-Base pretrained on ImageNet-1K. We train the backbone and TPSM branches with ./tools_cam/train_cam.py first, then we fix backbone and TPSM branch parameters and train the CAM branch with ./tools_cam/train_cam_fusecamfz.py. 
 
+Before training, we should ```mkdir pretraineds``` and ```wget  https://dl.fbaipublicfiles.com/deit/deit_base_patch16_224-b5f2ef4d.pth ``` in pretraineds folder. 
+
 On CUB-200-2011 dataset:
 ```
 python ./tools_cam/train_cam.py --config_file ./configs/CUB/deit_trt_base_patch16_224_0.6.yaml --lr 5e-5 MODEL.CAM_THR 0.1
 ```
 ```
-python ./tools_cam/train_cam_fusecamfz.py --config_file ./configs/CUB/deit_trt_fuse_base_patch16_224_0.6.yaml --lr 5e-5 MODEL.CAM_THR 0.1 MODEL.WEIGHTS ./ckpt/CUB/deit_trt_base_patch16_224_TOKENTHR0.6_BS128/ckpt/model_best_top1_loc.pth
+python ./tools_cam/train_cam_fusecamfz.py --config_file ./configs/CUB/deit_trt_fuse_base_patch16_224_0.6.yaml --lr 5e-5 MODEL.CAM_THR 0.1 MODEL.POSWEIGHTS ./ckpt/CUB/deit_trt_base_patch16_224_TOKENTHR0.6_BS128/ckpt/model_best_top1_loc.pth
 ```
 
 
@@ -118,7 +120,7 @@ On ImageNet1k dataset:
 python ./tools_cam/train_cam.py --config_file ./configs/ILSVRC/deit_trt_base_patch16_224_0.95.yaml --lr 5e-4 MODEL.CAM_THR 0.12
 ```
 ```
-python ./tools_cam/train_cam_fusecamfz.py --config_file ./configs/ILSVRC/deit_trt_fuse_base_patch16_224_0.95.yaml --lr 5e-4 MODEL.CAM_THR 0.12
+python ./tools_cam/train_cam_fusecamfz.py --config_file ./configs/ILSVRC/deit_trt_fuse_base_patch16_224_0.95.yaml --lr 5e-4 MODEL.CAM_THR 0.12 MODEL.POSWEIGHTS ./ckpt/ImageNet/deit_trt_base_patch16_224_0.95_0.688/ckpt/model_best_top1_loc.pth
 
 ```
 Please note that pretrained model weights of Deit-tiny, Deit-small and Deit-base on ImageNet-1k model will be downloaded when you first train you model, so the Internet should be connected. 

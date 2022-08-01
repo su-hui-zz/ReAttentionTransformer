@@ -389,14 +389,7 @@ class TRTFuse(VisionTransformer):
 
         # cam
         self.camfuse_block = CAM6FuseBlock(dim=self.embed_dim, num_heads=self.num_heads, num_classes = self.num_classes, mlp_ratio=self.mlp_ratio, qkv_bias=self.qkv_bias, qk_scale=self.qk_scale,drop=self.drop_rate, attn_drop=self.attn_drop, drop_path=self.dpr[-1], norm_layer=self.norm_layer, vis=self.vis)
-
         self.camfuse_block.cam_head.apply(self._init_weights)
-        # self.cam_tr  = Block(dim=self.embed_dim, num_heads=self.num_heads, mlp_ratio=self.mlp_ratio, qkv_bias=self.qkv_bias, qk_scale=self.qk_scale,
-        #                 drop=self.drop_rate, attn_drop=self.attn_drop, drop_path=self.dpr[-1], norm_layer=self.norm_layer, vis=self.vis)
-        # self.cam_norm = self.norm_layer(self.embed_dim, eps=1e-6)
-        # self.cam_head = nn.Conv2d(self.embed_dim, self.num_classes, kernel_size=3, stride=1, padding=1)
-        # self.cam_avgpool = nn.AdaptiveAvgPool2d(1)
-        # self.cam_head.apply(self._init_weights)
     
 
     def forward_featurees(self, x):
@@ -533,11 +526,11 @@ def deit_base_patch16_224(pretrained=False, **kwargs):
         norm_layer=partial(nn.LayerNorm, eps=1e-6), **kwargs)
     model.default_cfg = _cfg()
     if pretrained:
-        # checkpoint = torch.hub.load_state_dict_from_url(
-        #     url="https://dl.fbaipublicfiles.com/deit/deit_base_patch16_224-b5f2ef4d.pth",
-        #     map_location="cpu", check_hash=True
-        # )['model']
-        checkpoint = torch.load("./pretraineds/deit_base_patch16_224-b5f2ef4d.pth",map_location="cpu")['model']
+        checkpoint = torch.hub.load_state_dict_from_url(
+            url="https://dl.fbaipublicfiles.com/deit/deit_base_patch16_224-b5f2ef4d.pth",
+            map_location="cpu", check_hash=True
+        )['model']
+        #checkpoint = torch.load("./pretraineds/deit_base_patch16_224-b5f2ef4d.pth",map_location="cpu")['model']
         model_dict = model.state_dict()
         for k in ['head.weight', 'head.bias', 'head_dist.weight', 'head_dist.bias']:
             if k in checkpoint and checkpoint[k].shape != model_dict[k].shape:
@@ -621,62 +614,12 @@ def deit_trt_fuse_base_patch16_224(pretrained=False, **kwargs):
         norm_layer=partial(nn.LayerNorm, eps=1e-6), **kwargs)
     model.default_cfg = _cfg()
 
-
-    # only for cub 
-
-    # for ilsvrc
-    # if pretrained:
-    #     # checkpoint = torch.hub.load_state_dict_from_url(
-    #     #     url="https://dl.fbaipublicfiles.com/deit/deit_base_patch16_224-b5f2ef4d.pth",
-    #     #     map_location="cpu", check_hash=True
-    #     # )['model']
-
-    #     checkpoint = torch.load("./pretraineds/deit_base_patch16_224-b5f2ef4d.pth",map_location="cpu")['model']
-    #     model_dict = model.state_dict()
-    #     for k,v in model_dict.items():
-    #         if 'cam_tr' in k and k not in checkpoint:
-    #             checkpoint[k] = checkpoint['blocks.11.' + '.'.join(k.split('.')[2:])]
-    #             print('copy '+ k + ' from ' + 'blocks.11.' + '.'.join(k.split('.')[2:]))
-    #         elif 'cam_norm' in k and k not in checkpoint:
-    #             checkpoint[k] = checkpoint[k.replace('camfuse_block.cam_norm','norm')]
-    #             print('copy '+ k + ' from ' + k.replace('camfuse_block.cam_norm','norm'))   
-    #         elif 'score_layer' in k and k not in checkpoint:
-    #             checkpoint[k] = checkpoint['blocks.11.' + '.'.join(k.split('.')[1:])]
-    #             print(k + ' copy from ' + 'blocks.11.' + '.'.join(k.split('.')[1:]))
-    #         elif 'score_norm' in k and k not in checkpoint:
-    #             checkpoint[k] = checkpoint[k.replace('score_norm','norm')]
-
-    #     model_dict.update(checkpoint)
-    #     model.load_state_dict(model_dict)
-
-    # only for ilsvrc, load pretrained weights
-    #if pretrained:
+    if pretrained:
         # checkpoint = torch.hub.load_state_dict_from_url(
         #     url="https://dl.fbaipublicfiles.com/deit/deit_base_patch16_224-b5f2ef4d.pth",
         #     map_location="cpu", check_hash=True
         # )['model']
-        #checkpoint = torch.load("./pretraineds/deit_base_patch16_224-b5f2ef4d.pth",map_location="cpu")['model']
-
-        #checkpoint = torch.load("./ckpt/ImageNet/deit_trt_base_patch16_224_0.95_0.688/ckpt/model_best_top1_loc.pth",map_location="cpu")['state_dict']
-        
-        # check_dict = {}
-        # for k,v in checkpoint.items():
-        #     check_dict[k.replace('module.','')] = v
-        # model_dict = model.state_dict()
-        # model_dict.update(check_dict)
-
-        # checkpoint_pre = torch.load("./pretraineds/deit_base_patch16_224-b5f2ef4d.pth",map_location="cpu")['model']
-        # for k,v in model_dict.items():
-        #     if 'cam_tr' in k and k not in checkpoint and k not in checkpoint_pre:
-        #         model_dict[k] = checkpoint_pre['blocks.11.' + '.'.join(k.split('.')[2:])]
-        #         print('copy '+ k + ' from ' + 'blocks.11.' + '.'.join(k.split('.')[2:]))
-        #     elif 'cam_norm' in k and k not in checkpoint and k not in checkpoint_pre:
-        #         model_dict[k] = checkpoint_pre[k.replace('camfuse_block.cam_norm','norm')]
-        #         print('copy '+ k + ' from ' + k.replace('camfuse_block.cam_norm','norm'))   
-
-        # model.load_state_dict(model_dict)
     
-    if pretrained:
         checkpoint = torch.load("./pretraineds/deit_base_patch16_224-b5f2ef4d.pth",map_location="cpu")['model']
         model_dict = model.state_dict()
         
