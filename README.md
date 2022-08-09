@@ -41,7 +41,7 @@ code：  0311
 
 First clone the repository locally:
 ```
-git clone https://github.com/....git
+git clone https://github.com/su-hui-zz/ReAttentionTransformer.git
 ```
 Then install Pytorch 1.10.2 , torchvision 0.11.3+.
 pip install timm==0.5.4
@@ -163,7 +163,12 @@ You can also open an issue under this project.
 If you use this code for a paper please cite:
 
 ```
-
+@article{su2022re,
+  title={Re-Attention Transformer for Weakly Supervised Object Localization},
+  author={Su, Hui and Ye, Yue and Chen, Zhiwei and Song, Mingli and Cheng, Lechao},
+  journal={arXiv preprint arXiv:2208.01838},
+  year={2022}
+}
 ```
 
 ## Acknowledgment
