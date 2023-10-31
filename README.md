@@ -163,11 +163,13 @@ You can also open an issue under this project.
 If you use this code for a paper please cite:
 
 ```
-@article{su2022re,
-  title={Re-Attention Transformer for Weakly Supervised Object Localization},
-  author={Su, Hui and Ye, Yue and Chen, Zhiwei and Song, Mingli and Cheng, Lechao},
-  journal={arXiv preprint arXiv:2208.01838},
-  year={2022}
+@inproceedings{Su_2022_BMVC,
+author    = {Hui Su and Yue Ye and Zhiwei Chen and Mingli Song and Lechao Cheng},
+title     = {Re-Attention Transformer for Weakly Supervised Object Localization},
+booktitle = {33rd British Machine Vision Conference 2022, {BMVC} 2022, London, UK, November 21-24, 2022},
+publisher = {{BMVA} Press},
+year      = {2022},
+url       = {https://bmvc2022.mpi-inf.mpg.de/0070.pdf}
 }
 ```
 
